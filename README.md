@@ -50,7 +50,7 @@ Ensure you've followed the Project structure
 phaser-build
 ```
 
-this will run the pastest supported version of phaser, alternatively you may provide a version
+this will run the latest supported version of phaser, alternatively you may provide a version
 
 ```bash
 phaser-build 3.3
