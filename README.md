@@ -37,9 +37,22 @@ source phaser.bash
 ### Project structure
 
 1) ensure you have a `package.json` in the project root
+
 2) create a `.env` file in the project root (using the `.evn-example` as a reference)
+
+  ```bash
+  DOCKER_PHASER_ROOT=`pwd`
+  PROJECT_NAME=docker-phaser
+  DOCKERHUB_USER=chrisdlangton
+  SERVER_PORT=3000
+  HOST_PORT=3000
+  HOST_ADDR=127.0.0.1
+  ```
+
 3) all of the phaser project files should be in the `src` directoy within the project root
+
 4) the static web server expects an `src/index.html` file
+
 5) OPTIONALLY: to preserve bash history between running containers create a `.bash_history_docker` file in the project root
 
 ### Build the docker container
