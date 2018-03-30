@@ -72,3 +72,13 @@ phaser-exec() {
   fi
   docker exec -it ${PROJECT_NAME} $@
 }
+
+dockerhub-push() {
+  VERSION=$1
+  if [ -z $VERSION ]; then
+    VERSION=latest
+  fi
+  docker tag ${DOCKERHUB_USER}/${PROJECT_NAME} ${DOCKERHUB_USER}/${PROJECT_NAME}:${VERSION}
+  docker push ${DOCKERHUB_USER}/${PROJECT_NAME}
+}
+
