@@ -56,3 +56,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# Bash history persists between containers
+.bash_history_docker
