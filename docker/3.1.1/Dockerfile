@@ -11,24 +11,22 @@ ENV NODE_ENV development
 # The SUID flag on binaries has a vulnerability where intruders have a vector for assuming root access to the host
 RUN for i in `find / -path /proc -prune -o -perm /6000 -type f`; do chmod a-s $i; done
 
-RUN adduser -s /usr/local/bin/node -h /phaser -S -D phaser
-WORKDIR /phaser
-
-RUN apk update \
+RUN npm i -g generator-phaser-plus@3.0.0-beta.1 static-server@2.2 --no-optional --no-package-lock && \
+    apk update \
     && apk add --update wget git curl bash \
     && rm -rf /tmp/ \
     && rm -rf /var/cache/apk/*
 
-COPY package.json .
-RUN npm i -g generator-phaser-plus@3.0.0-beta.1 static-server@2.2 --no-optional --no-package-lock
-RUN npm i phaser@3.1.1 --no-optional --no-package-lock
+RUN adduser -s /usr/local/bin/node -h /phaser -S -D phaser
+WORKDIR /phaser
+USER phaser
 
+COPY package.json .
+RUN npm i phaser@3.1.1 --no-optional --no-package-lock \
 # Install photonstorm/phaser3-project-template to /phaser/boilerplate
-RUN git clone https://github.com/photonstorm/phaser3-project-template.git /phaser/boilerplate && \
+ && git clone https://github.com/photonstorm/phaser3-project-template.git /phaser/boilerplate && \
     cd /phaser/boilerplate && \
     npm i --no-optional --no-package-lock
-
-USER phaser
 
 HEALTHCHECK --interval=10s --timeout=3s --start-period=3s \
     CMD curl --silent --fail http://localhost:$PHASER_PORT/ || exit 1
