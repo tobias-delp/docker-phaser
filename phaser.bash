@@ -1,6 +1,6 @@
 loadenv() {
   if [[ -z `cat .env 2>/dev/null` ]]; then
-    echo "Please add a .env file\nSee: https://github.com/chrisdlangton/docker-phaser"
+    echo -e "Please add a .env file\nSee: https://github.com/chrisdlangton/docker-phaser"
     exit 1
   else
     source .env

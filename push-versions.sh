@@ -29,7 +29,7 @@ do
   if [ -z ${LAST_VERSION} ]; then
     for v in "${versions[@]}"
     do
-      docker rmi ${DOCKERHUB_USER}/${PROJECT_NAME}:${v}
+      docker rmi ${DOCKERHUB_USER}/${PROJECT_NAME}:${v} 2>/dev/null
     done
   else
     docker rmi ${DOCKERHUB_USER}/${PROJECT_NAME}:${LAST_VERSION}
@@ -44,9 +44,9 @@ do
   -f ${WORKDIR}/docker/${VERSION}/Dockerfile \
   -t ${DOCKERHUB_USER}/${PROJECT_NAME}:${VERSION}
 
+  cd $WORKDIR
   dockerhub-push ${VERSION}
   LAST_VERSION=$VERSION
 done
 
-cd $WORkDIR
 docker rmi ${DOCKERHUB_USER}/${PROJECT_NAME}:${LAST_VERSION}
