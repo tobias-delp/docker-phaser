@@ -61,6 +61,7 @@ source phaser.bash
   SERVER_PORT=3000
   HOST_PORT=3000
   HOST_ADDR=127.0.0.1
+  PHASER_INDEX=src/index.html
   ```
 
 3) all of the phaser project files should be in the `src` directoy within the project root

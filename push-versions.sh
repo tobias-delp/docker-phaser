@@ -36,8 +36,6 @@ do
   fi
   cd ${WORKDIR}/docker/${VERSION}/
   docker build . \
-  --build-arg PHASER_PORT=${SERVER_PORT} \
-  --build-arg PHASER_INDEX=${PHASER_INDEX} \
   --compress \
   --force-rm \
   --rm \
@@ -47,6 +45,7 @@ do
   cd $WORKDIR
   dockerhub-push ${VERSION}
   LAST_VERSION=$VERSION
+
 done
 
 docker rmi ${DOCKERHUB_USER}/${PROJECT_NAME}:${LAST_VERSION}
