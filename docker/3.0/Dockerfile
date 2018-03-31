@@ -21,7 +21,7 @@ RUN apk update \
 
 COPY package.json .
 RUN npm i -g generator-phaser-plus@3.0.0-beta.1 static-server@2.2 --no-optional --no-package-lock
-RUN npm i phaser@3.3 --no-optional --no-package-lock
+RUN npm i phaser@3.0 --no-optional --no-package-lock
 
 # Install photonstorm/phaser3-project-template to /phaser/boilerplate
 RUN git clone https://github.com/photonstorm/phaser3-project-template.git /phaser/boilerplate && \
