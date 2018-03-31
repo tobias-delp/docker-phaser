@@ -1,5 +1,4 @@
 loadenv() {
-  echo -e PWD `pwd`
   if [[ -z `cat .env 2>/dev/null` ]]; then
     echo -e "Please add a .env file\nSee: https://github.com/chrisdlangton/docker-phaser"
     exit 1
@@ -41,6 +40,9 @@ phaser-start() {
   if [ -z ${HOST_PORT} ]; then
     HOST_PORT=3000
   fi
+  if [ -z ${STATIC_SERVER_ARGS} ]; then
+    STATIC_SERVER_ARGS="--no-cache"
+  fi
   docker run \
   -v ${DOCKER_PHASER_ROOT}/.bash_history_docker:/home/phaser/.bash_history \
   -v ${DOCKER_PHASER_ROOT}/src:/phaser/src \
@@ -49,6 +51,7 @@ phaser-start() {
   -e NODE_ENV=${NODE_ENV} \
   -e PHASER_PORT=${SERVER_PORT} \
   -e PHASER_INDEX=${PHASER_INDEX} \
+  -e STATIC_SERVER_ARGS=${STATIC_SERVER_ARGS} \
   --name ${PROJECT_NAME} \
   -t ${DOCKERHUB_USER}/${PROJECT_NAME}
 }

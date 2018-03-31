@@ -4,6 +4,7 @@ LABEL author="github.com/chrisdlangton"
 ENV PHASER_PORT 3000
 ENV PHASER_INDEX src/index.html
 ENV NODE_ENV development
+ENV STATIC_SERVER_ARGS ""
 
 # The SUID flag on binaries has a vulnerability where intruders have a vector for assuming root access to the host
 RUN for i in `find / -path /proc -prune -o -perm /6000 -type f`; do chmod a-s $i; done
@@ -33,4 +34,4 @@ EXPOSE 8080
 # Expose static web server
 EXPOSE $PHASER_PORT
 VOLUME [ "/phaser/src" ]
-CMD [ "bash", "-c", "static-server -p ${PHASER_PORT} --cors --no-cache -i ${PHASER_INDEX}" ]
+CMD [ "bash", "-c", "static-server -p ${PHASER_PORT} -i ${PHASER_INDEX} ${STATIC_SERVER_ARGS}" ]

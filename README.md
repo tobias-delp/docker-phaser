@@ -55,13 +55,14 @@ source phaser.bash
 2) create a `.env` file in the project root (using the `.evn-example` as a reference)
 
   ```bash
-  DOCKER_PHASER_ROOT=`pwd`
-  PROJECT_NAME=docker-phaser
-  DOCKERHUB_USER=chrisdlangton
-  SERVER_PORT=3000
-  HOST_PORT=3000
-  HOST_ADDR=127.0.0.1
-  PHASER_INDEX=src/index.html
+  DOCKER_PHASER_ROOT=/path/to/project     # Required: set this to build and run docker-phaser with it's helper functions
+  PROJECT_NAME=docker-phaser              # Required: set this to build and run docker-phaser with it's helper functions
+  DOCKERHUB_USER=chrisdlangton            # Required: set this to build and run docker-phaser with it's helper functions
+  SERVER_PORT=3000                        # optionally change the static server port to bind too insdie the container
+  HOST_PORT=3000                          # optional, port to listen on the host side
+  HOST_ADDR=127.0.0.1                     # optional, address to bind to on the host side
+  PHASER_INDEX=src/index.html             # optionally change the static server index file from this default value
+  STATIC_SERVER_ARGS="--cors --no-cache"  # optional arguments for the node static server (see the link in features section)
   ```
 
 3) all of the phaser project files should be in the `src` directoy within the project root
@@ -113,6 +114,10 @@ or drop into a shell with just `phaser-exec`
 ### Stop the web server
 
 This can simply be done with `phaser-stop`
+
+### Restarting the web server
+
+This can simply be done with `phaser-restart`
 
 ## Extending functionality
 
