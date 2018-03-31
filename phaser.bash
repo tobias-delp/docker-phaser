@@ -1,10 +1,14 @@
-if [[ -z `cat .env 2>/dev/null` ]]; then
-  echo "Please add a .env file\nSee: https://github.com/chrisdlangton/docker-phaser"
-else
-  source .env
-fi
+loadenv() {
+  if [[ -z `cat .env 2>/dev/null` ]]; then
+    echo "Please add a .env file\nSee: https://github.com/chrisdlangton/docker-phaser"
+    exit 1
+  else
+    source .env
+  fi
+}
 
 phaser-stop() {
+  loadenv
   if [ -z ${PROJECT_NAME} ]; then
     echo "variables [PROJECT_NAME] not fond"
     exit 1
@@ -14,6 +18,7 @@ phaser-stop() {
 }
 
 phaser-start() {
+  loadenv
   if [ -z ${DOCKER_PHASER_ROOT} ] || [ -z ${DOCKERHUB_USER} ] || [ -z ${PROJECT_NAME} ]; then
     echo "variables [DOCKER_PHASER_ROOT,DOCKERHUB_USER,PROJECT_NAME] not fond"
     exit 1
@@ -42,6 +47,7 @@ phaser-start() {
 }
 
 phaser-build() {
+  loadenv
   if [ -z ${DOCKERHUB_USER} ] || [ -z ${PROJECT_NAME} ]; then
     echo "variables [DOCKERHUB_USER,PROJECT_NAME] not fond"
     exit 1
@@ -66,6 +72,7 @@ phaser-build() {
 }
 
 phaser-exec() {
+  loadenv
   if [ -z ${PROJECT_NAME} ]; then
     echo "variables [PROJECT_NAME] not fond"
     exit 1
@@ -74,6 +81,7 @@ phaser-exec() {
 }
 
 dockerhub-push() {
+  loadenv
   VERSION=$1
   if [ -z $VERSION ]; then
     VERSION=latest
