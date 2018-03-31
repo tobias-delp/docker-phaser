@@ -19,14 +19,15 @@ RUN apk update \
     && rm -rf /tmp/ \
     && rm -rf /var/cache/apk/*
 
+COPY package.json .
+RUN npm i -g generator-phaser-plus@3.0.0-beta.1 static-server@2.2 --no-optional --no-package-lock
+RUN npm i phaser@3.3 --no-optional --no-package-lock
+
 USER phaser
 
-COPY package.json .
-RUN npm i phaser@3.3 static-server@2.2 --no-optional --no-package-lock
-
-HEALTHCHECK --interval=3s --timeout=3s --start-period=10s \
+HEALTHCHECK --interval=10s --timeout=3s --start-period=3s \
     CMD curl --silent --fail http://localhost:$PHASER_PORT/ || exit 1
 
 EXPOSE $PHASER_PORT
 VOLUME [ "/phaser/src" ]
-CMD [ "bash", "-c", "node_modules/static-server/bin/static-server.js -p ${PHASER_PORT} --cors --no-cache -i ${PHASER_INDEX}" ]
+CMD [ "bash", "-c", "static-server -p ${PHASER_PORT} --cors --no-cache -i ${PHASER_INDEX}" ]

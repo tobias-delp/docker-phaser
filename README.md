@@ -26,6 +26,13 @@ Specify a specific supported Phaser version
 docker pull chrisdlangton/docker-phaser:3.3
 ```
 
+## Features
+
+- Secure Docker Linux environment running nodejs 9.10 typical for Phaser3 projects
+- Create Phaser Web games with ease: [rblopes/generator-phaser-plus](https://github.com/rblopes/generator-phaser-plus)
+- A simple static server written in node.js [nbluis/static-server](https://github.com/nbluis/static-server)
+- Helper functions that manage the Docker and Phaser web server (for UNIX-like environments)
+
 ## Using the helper functions
 
 Enable the helper function in a UNIX-like environment (Mac/Linux) with

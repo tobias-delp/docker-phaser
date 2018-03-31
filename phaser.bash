@@ -82,3 +82,13 @@ dockerhub-push() {
   docker push ${DOCKERHUB_USER}/${PROJECT_NAME}
 }
 
+phaser-rebuild() {
+  phaser-stop
+  phaser-build
+  phaser-start
+}
+
+phaser-rebstart() {
+  phaser-stop
+  phaser-start
+}
