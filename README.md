@@ -40,6 +40,8 @@ The official Phaser 3 Webpack Project Template in `/phaser/boilerplate` can be s
 
 You should get familiar with this boilerplate by making changes and testing, when ready to start you're own project it is recommended you fork the project yourself on your host and when running docker-phaser mount that project to `/phaser/src` by following the next step below.
 
+Here ([phaser3-sandpit](https://github.com/chrisdlangton/phaser3-sandpit)) is an example of where to start if you were to use the official phaser3 webpack template.
+
 ## Using the helper functions
 
 Enable the helper function in a UNIX-like environment (Mac/Linux) with
