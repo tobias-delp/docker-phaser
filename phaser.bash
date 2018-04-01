@@ -44,13 +44,7 @@ phaser-start() {
     STATIC_SERVER_ARGS="--no-cache"
   fi
   docker run \
-  -v ${DOCKER_PHASER_ROOT}/.bash_history_docker:/home/phaser/.bash_history:rw \
-  -v ${DOCKER_PHASER_ROOT}/src:/phaser/src:rw \
-  -v ${DOCKER_PHASER_ROOT}/assets:/phaser/assets:rw \
-  -v ${DOCKER_PHASER_ROOT}/index.html:/phaser/index.html:rw \
-  -v ${DOCKER_PHASER_ROOT}/webpack.config.js:/phaser/webpack.config.js:rw \
   -p ${HOST_ADDR}:${HOST_PORT}:${SERVER_PORT}/tcp \
-  -p ${HOST_ADDR}:8000:8000/tcp \
   -e NODE_ENV=${NODE_ENV} \
   -e PHASER_PORT=${SERVER_PORT} \
   -e PHASER_INDEX=${PHASER_INDEX} \
@@ -159,7 +153,7 @@ Consider adding the following to your package.json if not already.
 
 "scripts": {
   "build": "webpack",
-  "start": "npm run build && webpack-dev-server --port=8000"
+  "start": "npm run build && webpack-dev-server --port=8080"
 }
 EOF
 

@@ -67,9 +67,25 @@ source phaser.bash
 
 3) all of the phaser project files should be in the `src` directoy within the project root
 
-4) the static web server expects an `src/index.html` file
+4) the static web server expects an `src/index.html` file, or you may choose to change it with `PHASER_INDEX` in your `.env`
 
 5) OPTIONALLY: to preserve bash history between running containers create a `.bash_history_docker` file in the project root
+
+6) OPTIONALLY: disable the static server, or rather run the webpack-dev-server only just add your own `Dockerfile`;
+
+  ```dockerfile
+  FROM chrisdlangton/docker-phaser
+  CMD [ "npm", "start" ]
+  ```
+
+and ensure you've added to you `package.json` the following;
+
+  ```json
+  "scripts": {
+    "build": "webpack",
+    "start": "npm run build && webpack-dev-server --port=8080"
+  }
+  ```
 
 ### Build the docker container
 
@@ -119,6 +135,8 @@ This can simply be done with `phaser-stop`
 
 This can simply be done with `phaser-restart`
 
-## Extending functionality
+## Contributing
 
-Extend the implementation by adding files and commands in your own project `Dockerfile` with `FROM chrisdlangton/docker-phaser`. If the functionality you're adding is useful to others please consider contributing to this project by forking and createding a pull request.
+Extend the implementation by adding files and commands in your own project `Dockerfile` with `FROM chrisdlangton/docker-phaser`. 
+
+If the functionality you're adding is useful to others please consider contributing to this project by forking and createding a pull request.

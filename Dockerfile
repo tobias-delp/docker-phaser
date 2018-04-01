@@ -94,7 +94,7 @@ HEALTHCHECK --interval=10s --timeout=3s --start-period=3s \
     CMD curl --silent --fail http://localhost:${PHASER_PORT}/ || exit 1
 
 # Expose webpack server on 8080
-EXPOSE 8000
+EXPOSE 8080
 # Expose static web server
 EXPOSE $PHASER_PORT
 VOLUME [ "/phaser/src", "/phaser/assets" ]
