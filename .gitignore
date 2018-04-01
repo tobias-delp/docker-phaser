@@ -57,5 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# IDE
+.idea
+.vscode
+
 # Bash history persists between containers
 .bash_history_docker
