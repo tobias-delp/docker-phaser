@@ -44,9 +44,6 @@ phaser-start() {
     STATIC_SERVER_ARGS="--no-cache"
   fi
   docker run \
-  -v ${DOCKER_PHASER_ROOT}/.bash_history_docker:/home/phaser/.bash_history \
-  -v ${DOCKER_PHASER_ROOT}/src:/phaser/src \
-  -v ${DOCKER_PHASER_ROOT}/package.json:/phaser/package.json \
   -p ${HOST_ADDR}:${HOST_PORT}:${SERVER_PORT}/tcp \
   -e NODE_ENV=${NODE_ENV} \
   -e PHASER_PORT=${SERVER_PORT} \
@@ -106,4 +103,65 @@ phaser-restart() {
   phaser-stop
   echo -e Starting
   phaser-start
+}
+
+phaser-boilerplate() {
+  cat <<EOF
+The following files will be written (over-writen on the host):
+.
+├── assets
+│   └── logo.png
+├── index.html
+├── src
+│   └── index.js
+└── webpack.config.js
+
+Continue? (Y/n)
+EOF
+  WORKDIR=`pwd`
+  read CONFIRM
+  loadenv
+  if [[ ${CONFIRM} == 'Y' ]]; then
+    d=/phaser/boilerplate
+    docker cp ${PROJECT_NAME}:${d}/webpack.config.js ${WORKDIR}/webpack.config.js
+    docker cp ${PROJECT_NAME}:${d}/index.html ${WORKDIR}/index.html
+    docker cp ${PROJECT_NAME}:${d}/assets ${WORKDIR}/
+    docker cp ${PROJECT_NAME}:${d}/src ${WORKDIR}/
+    tree
+
+    echo -e "Install dependencies? (Y/n)"
+    read CONFIRM
+    if [[ ${CONFIRM} == 'Y' ]]; then
+      docker exec -it ${PROJECT_NAME} npm i --save-dev webpack-dev-server@2.11 webpack@3.4 raw-loader@0.5 --no-optional
+
+      echo -e "Update host package.json? (Y/n)"
+      read CONFIRM
+      if [[ ${CONFIRM} == 'Y' ]]; then
+        docker cp ${PROJECT_NAME}:/phaser/package.json ${WORKDIR}/package.json
+      fi
+
+      echo -e "Update host package-lock.json? (Y/n)"
+      read CONFIRM
+      if [[ ${CONFIRM} == 'Y' ]]; then
+        docker cp ${PROJECT_NAME}:/phaser/package-lock.json ${WORKDIR}/package-lock.json
+      fi
+
+    fi
+
+    cat <<EOF
+Consider adding the following to your package.json if not already.
+
+"scripts": {
+  "build": "webpack",
+  "start": "npm run build && webpack-dev-server --port=8080"
+}
+EOF
+
+    echo -e "Do you want to run webpack now? (Y/n)"
+    read CONFIRM
+    if [[ ${CONFIRM} == 'Y' ]]; then
+      docker exec -it ${PROJECT_NAME} npm start
+    fi
+
+  fi
 }
