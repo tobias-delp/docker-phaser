@@ -72,7 +72,8 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
 # The SUID flag on binaries has a vulnerability where intruders have a vector for assuming root access to the host
 RUN for i in `find / -path /proc -prune -o -perm /6000 -type f`; do chmod a-s $i; done
 
-RUN npm i -g generator-phaser-plus@3.0.0-beta.1 static-server@2.2 --no-optional --no-package-lock && \
+RUN npm i -g generator-phaser-plus@3.0.0-beta.1 static-server@2.2 es6-module-transpiler@0.10 \
+    --no-optional --no-package-lock && \
     apk update \
     && apk add --no-cache --update git curl bash \
     && rm -rf /tmp/ \
@@ -93,8 +94,8 @@ HEALTHCHECK --interval=10s --timeout=3s --start-period=3s \
     CMD curl --silent --fail http://localhost:${PHASER_PORT}/ || exit 1
 
 # Expose webpack server on 8080
-EXPOSE 8080
+EXPOSE 8000
 # Expose static web server
 EXPOSE $PHASER_PORT
-VOLUME [ "/phaser/src" ]
+VOLUME [ "/phaser/src", "/phaser/assets" ]
 CMD [ "bash", "-c", "static-server -p ${PHASER_PORT} -i ${PHASER_INDEX} ${STATIC_SERVER_ARGS}" ]
