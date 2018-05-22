@@ -1,23 +1,13 @@
-language: node_js
-cache:
-  directories:
-    - node_modules
+sudo: required
+services:
+  - docker
+language: ruby
 notifications:
   email: false
-node_js:
-  - '4'
-  - '6'
-  - '8'
-  - '9'
-  - '10'
-before_install:
-  - npm i -g npm@^2.0.0
 before_script:
-  - npm prune
+  - source phaser.bash
 script:
-  - npm run lint
-after_success:
-  - npm run semantic-release
+  - push-versions.sh
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
