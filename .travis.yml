@@ -7,7 +7,7 @@ notifications:
 before_script:
   - source phaser.bash
 script:
-  - push-versions.sh
+  - ./push-versions.sh
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
