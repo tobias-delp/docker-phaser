@@ -2,8 +2,24 @@
   "name": "docker-phaser",
   "version": "1.0.0",
   "description": "Easy quick phaser environemnt for anywhere Docker runs",
+  "scripts": {
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "lint": "standard --verbose | snazzy"
+  },
+  "standard": {
+    "ignore": [
+      "dist/",
+      "gulpfile.babel.js"
+    ]
+  },
   "dependencies": {
     "phaser": "^3.3"
+  },
+  "devDependencies": {
+    "semantic-release": "^4.3.5",
+    "snazzy": "^5.0.0",
+    "standard": "^8.3.0",
+    "run-sequence": "^1.2.2"
   },
   "repository": {
     "type": "git",
