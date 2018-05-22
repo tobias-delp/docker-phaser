@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:edge
 LABEL author="github.com/chrisdlangton"
 
 ENV NODE_VERSION 9.10.0

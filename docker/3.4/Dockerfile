@@ -84,7 +84,7 @@ WORKDIR /phaser
 USER phaser
 
 COPY package.json .
-RUN npm i phaser@3.3.0 --no-optional --no-package-lock \
+RUN npm i phaser@3.4 --no-optional --no-package-lock \
 # Install photonstorm/phaser3-project-template to /phaser/boilerplate
  && git clone https://github.com/photonstorm/phaser3-project-template.git /phaser/boilerplate && \
     cd /phaser/boilerplate && \

@@ -1,6 +1,7 @@
 FROM alpine:edge
 LABEL author="github.com/chrisdlangton"
 
+ENV PHASER_VERSION 3.8
 ENV NODE_VERSION 9.10.0
 ENV YARN_VERSION 1.5.1
 ENV PHASER_PORT 3000
@@ -84,7 +85,7 @@ WORKDIR /phaser
 USER phaser
 
 COPY package.json .
-RUN npm i phaser@3.3.0 --no-optional --no-package-lock \
+RUN npm i phaser@${PHASER_VERSION} --no-optional --no-package-lock \
 # Install photonstorm/phaser3-project-template to /phaser/boilerplate
  && git clone https://github.com/photonstorm/phaser3-project-template.git /phaser/boilerplate && \
     cd /phaser/boilerplate && \
