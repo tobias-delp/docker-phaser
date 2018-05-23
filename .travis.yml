@@ -3,9 +3,59 @@ services:
   - docker
 language: ruby
 notifications:
+  slack:
+    on_success: always
   email: false
 script:
-  - ./build-versions.sh
+  - docker rmi ci/docker-phaser
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.0
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.0.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.0.0
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.1/Dockerfile
+  - docker rmi ci/docker-phaser:3.1
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.1.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.1.0
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.1.1/Dockerfile
+  - docker rmi ci/docker-phaser:3.1.1
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.1.2/Dockerfile
+  - docker rmi ci/docker-phaser:3.1.2
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.2/Dockerfile
+  - docker rmi ci/docker-phaser:3.2
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.2.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.2.0
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.2.1/Dockerfile
+  - docker rmi ci/docker-phaser:3.2.1
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.3/Dockerfile
+  - docker rmi ci/docker-phaser:3.3
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.3.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.3.0
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.4/Dockerfile
+  - docker rmi ci/docker-phaser:3.4
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.4.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.4.0
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.5/Dockerfile
+  - docker rmi ci/docker-phaser:3.5
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.5.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.5.0
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.5.1/Dockerfile
+  - docker rmi ci/docker-phaser:3.5.1
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.6/Dockerfile
+  - docker rmi ci/docker-phaser:3.6
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.6.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.6.0
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.6.1/Dockerfile
+  - docker rmi ci/docker-phaser:3.6.1
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.7/Dockerfile
+  - docker rmi ci/docker-phaser:3.7
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.7.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.7.0
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.7.1/Dockerfile
+  - docker rmi ci/docker-phaser:3.7.1
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.8/Dockerfile
+  - docker rmi ci/docker-phaser:3.8
+  - travis_wait docker build . --compress --force-rm --rm -f docker/3.8.0/Dockerfile
+  - docker rmi ci/docker-phaser:3.8.0
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
