@@ -7,7 +7,6 @@ notifications:
     on_success: always
   email: false
 script:
-  - docker rmi ci/docker-phaser
   - travis_wait docker build . --compress --force-rm --rm -f docker/3.0/Dockerfile
   - docker rmi ci/docker-phaser:3.0
   - travis_wait docker build . --compress --force-rm --rm -f docker/3.0.0/Dockerfile
