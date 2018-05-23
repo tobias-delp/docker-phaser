@@ -4,10 +4,8 @@ services:
 language: ruby
 notifications:
   email: false
-before_script:
-  - source phaser.bash
 script:
-  - ./push-versions.sh
+  - ./build-versions.sh
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
