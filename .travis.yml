@@ -55,6 +55,10 @@ script:
   - docker rmi ci/docker-phaser:3.8
   - docker build . --compress -f docker/3.8.0/Dockerfile -t ci/docker-phaser:3.8.0
   - docker rmi ci/docker-phaser:3.8.0
+  - docker build . --compress -f docker/3.9/Dockerfile -t ci/docker-phaser:3.9
+  - docker rmi ci/docker-phaser:3.9
+  - docker build . --compress -f docker/3.9.0/Dockerfile -t ci/docker-phaser:3.9.0
+  - docker rmi ci/docker-phaser:3.9.0
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
