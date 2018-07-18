@@ -1,7 +1,7 @@
 FROM chrisdlangton/hardened-node-alpine:0.0.1
 LABEL author="github.com/chrisdlangton"
 
-ENV PHASER_VERSION 3.0
+ENV PHASER_VERSION 3.8
 ENV PHASER_PORT 3000
 ENV PHASER_INDEX src/index.html
 ENV NODE_ENV development

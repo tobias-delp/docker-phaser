@@ -1,0 +1,22 @@
+{
+  "name": "docker-phaser",
+  "version": "1.0.0",
+  "description": "Easy quick phaser environemnt for anywhere Docker runs",
+  "dependencies": {
+    "phaser": "3.8.0"
+  },
+  "devDependencies": {
+    "generator-phaser-plus": "3.0.0-beta.1",
+    "static-server": "2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisdlangton/docker-phaser.git"
+  },
+  "author": "Christopher Langton <chris@langton.cloud>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/chrisdlangton/docker-phaser/issues"
+  },
+  "homepage": "https://github.com/chrisdlangton/docker-phaser#readme"
+}
